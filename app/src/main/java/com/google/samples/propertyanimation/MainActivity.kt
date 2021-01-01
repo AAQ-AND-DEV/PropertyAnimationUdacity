@@ -19,6 +19,8 @@ package com.google.samples.propertyanimation
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -101,12 +103,32 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun scaler() {
+        val scalerX = PropertyValuesHolder.ofFloat(View.SCALE_X, 4f)
+        val scalerY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 4f)
+        val animator = ObjectAnimator.ofPropertyValuesHolder(star,
+        scalerX, scalerY)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.changeEnabledOnAnimate(scaleButton)
+        animator.start()
     }
 
     private fun fader() {
+        val animator = ObjectAnimator.ofFloat(star, View.ALPHA, 0f)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.changeEnabledOnAnimate(fadeButton)
+        animator.start()
     }
 
     private fun colorizer() {
+        val animator = ObjectAnimator.ofArgb(star.parent, "backgroundColor",
+        Color.BLACK, Color.RED)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.duration = 1000
+        animator.start()
+
     }
 
     private fun shower() {
